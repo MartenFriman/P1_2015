@@ -33,8 +33,7 @@ void draw() {
 
 /**Method that creates a new random number every time it is called*/
 void getNewNumber() {
-  //Add code to get a new random number
-  lastResult = 2;
+  lastResult = int(random(1, 6);
 }
 
 void mouseClicked() {
@@ -48,4 +47,32 @@ boolean clickOnDice() {
   boolean onDice = false;
   if (mouseX > xPos-(diceSize/2) && mouseX < xPos+(diceSize/2) && mouseY > yPos-(diceSize/2) && mouseY < yPos+(diceSize/2)) onDice = true;  
   return onDice;
+}
+
+void throwDice() {
+  xPos = width/2;
+  yPos = 50;
+  xVel = random(-6, 6);
+  
+}
+
+void drawDice() {
+  if (yPos < height/3*2) {
+    yVel+=0.5;
+    xPos+= xVel;
+  }
+  
+  yPos+= yVel;
+  
+  if (yPos > height/3*2) {
+    yPos = height/3*2;
+    yVel = -yVel/2;
+    xVel = xVel/2;
+    if (yVel < 0.35 && yVel > -0.35) yVel=0;
+  }
+  
+  fill(255);
+  rect(xPos, yPos, diceSize, diceSize);
+  fill(0);
+  text(lastResult, xPos, yPos+20);
 }
